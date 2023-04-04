@@ -1,0 +1,16 @@
+version: "3"
+services:
+
+  nginx.docker:
+    container_name: "php_nginx"
+    image: php_nginx
+    user: root
+    working_dir: /app/
+    restart: always
+    volumes:
+      - ./:/app/
+    expose:
+      - 80
+    ports:
+      - 80:80
+    command: "/./app/docker/php/start.sh"
