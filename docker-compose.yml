@@ -1,12 +1,32 @@
 version: "3"
 services:
 
-  nginx.docker:
-    container_name: "php_nginx"
-    image: php_nginx
+  mysql.docker:
+    container_name: "magento_mysql"
+    image: magento_mysql
     user: root
     working_dir: /app/
-    restart: always
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: "magento$pass!"
+      MYSQL_DATABASE: "magento"
+      MYSQL_USER: "magento"
+      MYSQL_PASSWORD: "magento$pass!"
+    volumes:
+      - ./:/app/
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+
+  nginx.docker:
+    depends_on:
+      - "mysql.docker"
+    container_name: "magento_nginx"
+    image: magento_nginx
+    user: root
+    working_dir: /app/
+    restart: "no"
     volumes:
       - ./:/app/
     expose:
@@ -14,3 +34,4 @@ services:
     ports:
       - 80:80
     command: "/./app/docker/php/start.sh"
+
