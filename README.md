@@ -1,33 +1,25 @@
-# projeto-magento
-Projeto da mentoria CloudStorm para publicar um ecommerce Magento na nuvem AWS
+# CloudStorm: Projeto Magento
+Projeto da mentoria CloudStorm para publicar um ecommerce Magento na nuvem AWS.
 
-# PHP Extension
-ext-bcmath
-ext-ctype - 
-ext-curl
-ext-dom - 
-ext-fileinfo
-ext-filter - 
-ext-gd
-ext-hash -
-ext-iconv -
-ext-intl
-ext-json -
-ext-libxml -
-ext-mbstring
-ext-openssl
-ext-pcre -
-ext-pdo_mysql
-ext-simplexml - 
-ext-soap
-ext-sockets
-ext-sodium
-ext-tokenizer -
-ext-xmlwriter -
-ext-xsl
-ext-zip
-ext-zlib -
-lib-libxml -
+Este projeto é mantido pela CloudStorm em colaboração com os membros do programa de qualificação profissional da CloudStorm.
+Não há garantias de funcionamento do código aqui hospedado, este repositório tem o propósito de servir ao processo de aprendizagem e evolução profissional dos membros da CloudStorm.
+
+Caso seja membro ativo do programa de qualificação profissional da CloudStorm e queira contribuir com esse projeto entre em contato conosco via DM no servidor do Discord (https://discord.gg/acHQGUPwmN) para que possamos adicioná-lo(a). 
+
+Documentação:
+- [Preparação do ambiente de desenvolvimento](docs/development.md)
+
+Roadmap do projeto:
+- Entendimento da plataforma Magento ([Documentação Magento](https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/overview.html))
+- Levantamento de requisitos da infra-estrutura ([Requisitos Magento](https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/system-requirements.html?lang=pt-BR))
+- Criação do nosso ambiente de desenvolvimento (Git + Dcoker) para testes e validações ([Repositório GitHub](https://github.com/CloudStormDirectory/projeto-magento))
+- Planejamento e discussão do modelo mais simples possível para rodar na AWS
+- Criação da infra e implantação da plataforma de ecommerce
+- Testes de stress e medição da capacidade de usuários suportados no modelo mais simples e análise de custos
+- Lessons learned do primeiro estágio com a discussão dos próximos passos para evolução da plataforma
+- *Muitos outros passos por vir...*
+
+
 
 
 
