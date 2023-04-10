@@ -51,5 +51,5 @@ services:
       - 80
     ports:
       - "80:80"
-    command: "/./app/docker/php/start.sh"
+    command: "/./app/docker/nginx/start.sh"
 
