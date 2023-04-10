@@ -30,57 +30,35 @@ COPY config/nginx /etc/nginx
 RUN rm -rf /usr/local/etc/php
 RUN rm -rf /usr/local/etc/php-fpm.d
 RUN rm -rf /usr/local/etc/php-fpm.conf
-COPY config/php82/* /usr/local/etc
+COPY config/php82/php /usr/local/etc/php
+COPY config/php82/php-fpm.d /usr/local/etc/php-fpm.d
+COPY config/php82/php-fpm.conf /usr/local/etc/php-fpm.conf
 
 # PHP extensions required by Magento
 # As seguintes extenções já estão instaladas por padrão, (hash, iconv, json, libxml, openssl, pcre, tokenizer, zlib)
 
-RUN apk add oniguruma-dev
-RUN docker-php-ext-install mbstring
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
-RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install ctype
+RUN chmod +x /usr/local/bin/install-php-extensions
 
-RUN apk add curl-dev
-RUN docker-php-ext-install curl
-
-RUN apk add libxml2-dev
-RUN docker-php-ext-install dom
-
-RUN docker-php-ext-install fileinfo
-RUN docker-php-ext-install filter
-
-RUN apk add libpng-dev
-RUN docker-php-ext-install gd
-
-RUN apk add icu-dev
-RUN docker-php-ext-install intl
-
-RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install simplexml
-RUN docker-php-ext-install soap
-
-RUN apk add --no-cache linux-headers
-RUN docker-php-ext-install sockets
-
-RUN apk add libsodium-dev
-RUN docker-php-ext-install sodium
-
-RUN docker-php-ext-install xmlwriter
-
-RUN apk add libxslt-dev
-RUN docker-php-ext-install xsl
-
-RUN apk add libzip-dev
-RUN docker-php-ext-install zip
-
-# Instalando o PHP Composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-RUN php composer-setup.php
-RUN php -r "unlink('composer-setup.php');"
-RUN mv composer.phar /usr/local/bin/composer
-
+RUN install-php-extensions mbstring
+RUN install-php-extensions bcmath
+RUN install-php-extensions ctype
+RUN install-php-extensions curl
+RUN install-php-extensions dom
+RUN install-php-extensions fileinfo
+RUN install-php-extensions filter
+RUN install-php-extensions gd
+RUN install-php-extensions intl
+RUN install-php-extensions pdo_mysql
+RUN install-php-extensions simplexml
+RUN install-php-extensions soap
+RUN install-php-extensions sockets
+RUN install-php-extensions sodium
+RUN install-php-extensions xmlwriter
+RUN install-php-extensions xsl
+RUN install-php-extensions zip
+RUN install-php-extensions @composer
 
 
 

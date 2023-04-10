@@ -112,3 +112,6 @@ www/
 
 # Environment Files
 .env*
+
+# Data Folder
+/data/

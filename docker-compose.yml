@@ -4,7 +4,6 @@ services:
   mysql.docker:
     container_name: "magento_mysql"
     image: magento_mysql
-    user: root
     working_dir: /app/
     restart: "no"
     environment:
@@ -14,17 +13,36 @@ services:
       MYSQL_PASSWORD: "magento$pass!"
     volumes:
       - ./:/app/
+      - ./data/mysql:/var/lib/mysql
     expose:
       - 3306
     ports:
-      - 3306:3306
+      - "3306:3306"
+
+  elasticsearch.docker:
+    container_name: "magento_elasticsearch"
+    image: magento_elasticsearch
+    working_dir: /app/
+    restart: "no"
+    environment:
+      - node.name=es01
+      - cluster.name=es-magento-cluster
+    volumes:
+      - ./:/app/
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
+    expose:
+      - 9200
+      - 9300
+    ports:
+      - "9200:9200"
+      - "9300:9300"
 
   nginx.docker:
     depends_on:
       - "mysql.docker"
+      - "elasticsearch.docker"
     container_name: "magento_nginx"
     image: magento_nginx
-    user: root
     working_dir: /app/
     restart: "no"
     volumes:
@@ -32,6 +50,6 @@ services:
     expose:
       - 80
     ports:
-      - 80:80
+      - "80:80"
     command: "/./app/docker/php/start.sh"
 
