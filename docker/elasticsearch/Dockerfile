@@ -2,4 +2,5 @@
 FROM elasticsearch:8.7.0
 
 # specify the port number the container should expose
-EXPOSE 3306
+EXPOSE 9200
+EXPOSE 9300

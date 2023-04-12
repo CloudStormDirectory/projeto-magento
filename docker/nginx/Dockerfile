@@ -60,6 +60,11 @@ RUN install-php-extensions xsl
 RUN install-php-extensions zip
 RUN install-php-extensions @composer
 
+# --------------------------------------
+
+
+
+
 
 
 
