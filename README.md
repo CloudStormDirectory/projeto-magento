@@ -1,3 +1,7 @@
+<div align="center">
+<img src="logo.png" alt="CloudStorm Logo" />
+</div>
+
 # CloudStorm: Projeto Magento
 Projeto da mentoria CloudStorm para publicar um ecommerce Magento na nuvem AWS.
 
@@ -8,6 +12,7 @@ Caso seja membro ativo do programa de qualificação profissional da CloudStorm 
 
 Documentação:
 - [Preparação do ambiente de desenvolvimento](docs/development.md)
+- [Execução do ambiente de desenvolvimento](docs/execution.md)
 
 Roadmap do projeto:
 - Entendimento da plataforma Magento ([Documentação Magento](https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/overview.html))

@@ -42,64 +42,19 @@ Em adição estão sendo instaladas as seguintes extenções necessárias para r
 
 # Instalação Magento
 
-### Método Git:
-```shell
-git clone https://github.com/magento/magento2.git /app/www/magento
+### Passo 1:
+Acesse o site https://marketplace.magento.com/customer/accessKeys/ crie sua conta e gere sua chave de acesso seguindo 
+os seguintes passos https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/prerequisites/authentication-keys.html?lang=en .
 
-cd /app/www/magento
+### Passo 2:
+Copie o arquivo `.magento_template` para `.magento`, dentro dele você irá inserir as chaves na seguinte ordem:
 
-bin/magento setup:install \
---base-url=http://localhost/magento2ee \
---db-host=localhost \
---db-name=magento \
---db-user=magento \
---db-password=magento \
---admin-firstname=admin \
---admin-lastname=admin \
---admin-email=admin@admin.com \
---admin-user=admin \
---admin-password=admin123 \
---language=en_US \
---currency=USD \
---timezone=America/Chicago \
---use-rewrites=1 \
---search-engine=opensearch \
---opensearch-host=os-host.example.com \
---opensearch-port=9200 \
---opensearch-index-prefix=magento2 \
---opensearch-timeout=15
+`username`: `**MagentoPublicKey**`,
+`password`: `**MagentoPrivateKey**`
 
-```
+### Passo 3:
+Copie o arquivo `.env_template` para `.env`. Este arquivo contém as variáveis padrões do ambiente de desenvolvimento.
+Nele você pode adicionar outras variáveis que precise utilizar dentro do container caso instale ou customize a aplicação
+ou os serviços.
 
-**Cons**: Utilizar 1GB de espaço em disco.
 
-### Método Composer
-```shell
-composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /app/www/magento2
-
-cd /app/www/magento2
-
-bin/magento setup:install \
---base-url=http://localhost/magento2ee \
---db-host=localhost \
---db-name=magento \
---db-user=magento \
---db-password=magento \
---admin-firstname=admin \
---admin-lastname=admin \
---admin-email=admin@admin.com \
---admin-user=admin \
---admin-password=admin123 \
---language=en_US \
---currency=USD \
---timezone=America/Chicago \
---use-rewrites=1 \
---search-engine=opensearch \
---opensearch-host=os-host.example.com \
---opensearch-port=9200 \
---opensearch-index-prefix=magento2 \
---opensearch-timeout=15
-
-```
-
-**Cons**: Necessita de chaves de acesso geradas no adobe commerce market (https://marketplace.magento.com/customer/accessKeys/).

@@ -34,7 +34,7 @@ if [ ! -d "/app/www/magento2" ]; then
 
   echo "Installing APP parameters"
   bin/magento setup:install \
-  --base-url=http://localhost \
+  --base-url=http://www.magento.dvp \
   --db-host=${MYSQL_HOST} \
   --db-name=${MYSQL_DATABASE} \
   --db-user=${MYSQL_USER} \
