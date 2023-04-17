@@ -15,9 +15,9 @@ Documentação:
 - [Execução do ambiente de desenvolvimento](docs/execution.md)
 
 Roadmap do projeto:
+- (OK) Criação do nosso ambiente de desenvolvimento (Git + Dcoker) para testes e validações ([Repositório GitHub](https://github.com/CloudStormDirectory/projeto-magento))
 - Entendimento da plataforma Magento ([Documentação Magento](https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/overview.html))
 - Levantamento de requisitos da infra-estrutura ([Requisitos Magento](https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/system-requirements.html?lang=pt-BR))
-- Criação do nosso ambiente de desenvolvimento (Git + Dcoker) para testes e validações ([Repositório GitHub](https://github.com/CloudStormDirectory/projeto-magento))
 - Planejamento e discussão do modelo mais simples possível para rodar na AWS
 - Criação da infra e implantação da plataforma de ecommerce
 - Testes de stress e medição da capacidade de usuários suportados no modelo mais simples e análise de custos
