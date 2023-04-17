@@ -111,7 +111,7 @@ dist
 www/
 
 # Environment Files
-.env*
+.magento
 
 # Data Folder
 /data/

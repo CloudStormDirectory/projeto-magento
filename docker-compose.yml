@@ -6,11 +6,8 @@ services:
     image: magento_mysql
     working_dir: /app/
     restart: "no"
-    environment:
-      MYSQL_ROOT_PASSWORD: "magento$pass!"
-      MYSQL_DATABASE: "magento"
-      MYSQL_USER: "magento"
-      MYSQL_PASSWORD: "magento$pass!"
+    env_file:
+      - ./.env
     volumes:
       - ./:/app/
       - ./data/mysql:/var/lib/mysql
@@ -24,9 +21,8 @@ services:
     image: magento_elasticsearch
     working_dir: /app/
     restart: "no"
-    environment:
-      - node.name=es01
-      - cluster.name=es-magento-cluster
+    env_file:
+      - ./.env
     volumes:
       - ./:/app/
       - ./data/elasticsearch:/usr/share/elasticsearch/data
@@ -45,6 +41,8 @@ services:
     image: magento_nginx
     working_dir: /app/
     restart: "no"
+    env_file:
+      - ./.env
     volumes:
       - ./:/app/
     expose:
