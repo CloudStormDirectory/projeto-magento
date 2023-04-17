@@ -9,8 +9,8 @@ os seguintes passos https://experienceleague.adobe.com/docs/commerce-operations/
 ### Passo 2:
 Copie o arquivo `.magento_template` para `.magento`, dentro dele você irá inserir as chaves na seguinte ordem:
 
-`username`: `**MagentoPublicKey**`,
-`password`: `**MagentoPrivateKey**`
+- `username`: `**MagentoPublicKey**`
+- `password`: `**MagentoPrivateKey**`
 
 ### Passo 3:
 Copie o arquivo `.env_template` para `.env`. Este arquivo contém as variáveis padrões do ambiente de desenvolvimento.
