@@ -27,9 +27,10 @@ RUN rc-update add nginx
 RUN rm -rf /etc/nginx
 COPY config/nginx /etc/nginx
 
-RUN rm -rf /usr/local/etc/php
-RUN rm -rf /usr/local/etc/php-fpm.d
-RUN rm -rf /usr/local/etc/php-fpm.conf
+RUN rm -rf /usr/local/etc/php && \
+  rm -rf /usr/local/etc/php-fpm.d && \
+  rm -rf /usr/local/etc/php-fpm.conf
+
 COPY config/php82/php /usr/local/etc/php
 COPY config/php82/php-fpm.d /usr/local/etc/php-fpm.d
 COPY config/php82/php-fpm.conf /usr/local/etc/php-fpm.conf
@@ -41,30 +42,24 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 
 RUN chmod +x /usr/local/bin/install-php-extensions
 
-RUN install-php-extensions mbstring
-RUN install-php-extensions bcmath
-RUN install-php-extensions ctype
-RUN install-php-extensions curl
-RUN install-php-extensions dom
-RUN install-php-extensions fileinfo
-RUN install-php-extensions filter
-RUN install-php-extensions gd
-RUN install-php-extensions intl
-RUN install-php-extensions pdo_mysql
-RUN install-php-extensions simplexml
-RUN install-php-extensions soap
-RUN install-php-extensions sockets
-RUN install-php-extensions sodium
-RUN install-php-extensions xmlwriter
-RUN install-php-extensions xsl
-RUN install-php-extensions zip
-RUN install-php-extensions @composer
+RUN install-php-extensions \
+  mbstring \
+  bcmath \
+  ctype \
+  curl \
+  dom \
+  fileinfo \
+  filter \
+  gd \
+  intl \
+  pdo_mysql \
+  simplexml \
+  soap \
+  sockets \
+  sodium \
+  xmlwriter \
+  xsl \
+  zip\
+  @composer
 
 # --------------------------------------
-
-
-
-
-
-
-
