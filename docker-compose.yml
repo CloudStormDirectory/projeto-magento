@@ -51,3 +51,14 @@ services:
       - "80:80"
     command: "/./app/docker/nginx/start.sh"
 
+  mail.docker:
+    container_name: "magento_mail"
+    image: "djfarrelly/maildev"
+    restart: "no"
+    expose:
+      - 1080
+      - 25
+    ports:
+      - "1080:80"
+      - "25:25"
+

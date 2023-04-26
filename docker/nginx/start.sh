@@ -53,6 +53,10 @@ if [ ! -d "/app/www/magento2" ]; then
   --elasticsearch-port=${ES_PORT} \
   --backend-frontname=admin
 
+  echo "Setting up Sendmail host and port"
+  bin/magento config:set system/smtp/host mail.docker
+  bin/magento config:set system/smtp/port 25
+
   cd ..
   echo "Magento Installed"
 else

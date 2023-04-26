@@ -58,3 +58,34 @@ Nele você pode adicionar outras variáveis que precise utilizar dentro do conta
 ou os serviços.
 
 
+### Two Factor Authentication on Dev Mode
+```
+bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth --clear-static-content
+bin/magento module:disable Magento_TwoFactorAuth --clear-static-content
+bin/magento setup:di:compile
+bin/magento cache:flush
+```
+
+
+```shell
+bin/magento config:set system/smtp/host mail.docker
+bin/magento config:set system/smtp/port 25 
+```
+
+### Servidor de email Fake
+http://localhost:1080
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
