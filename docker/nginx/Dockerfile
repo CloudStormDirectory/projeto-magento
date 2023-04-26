@@ -62,4 +62,6 @@ RUN install-php-extensions \
   zip\
   @composer
 
+RUN apk add ssmtp
+
 # --------------------------------------

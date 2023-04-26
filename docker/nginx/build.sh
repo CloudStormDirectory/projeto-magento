@@ -5,4 +5,5 @@ docker rm -f magento_nginx
 
 # No Cache Build
 docker build --no-cache -t magento_nginx -f docker/nginx/Dockerfile .
+#docker build -t magento_nginx -f docker/nginx/Dockerfile .
 

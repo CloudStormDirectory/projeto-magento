@@ -1,24 +1,11 @@
 #!/usr/bin/env bash
 
+# Update NGinx config files
 rm -rf /etc/nginx
 cp -R /app/config/nginx /etc
 service nginx restart
 
-#if [ ! -d "/app/www/magento" ]; then
-#  if [ ! -d "/app/www" ]; then
-#    mkdir /app/www
-#  fi
-#  echo "Cloning Magento..."
-#  cd /app/www
-#  git clone https://github.com/magento/magento2.git magento
-#  cd magento
-#  composer install
-#  cd ..
-#  echo "Magento cloned"
-#else
-#  echo "Magento OK"
-#fi
-
+# Install Magento if it's not there yet
 if [ ! -d "/app/www/magento2" ]; then
   if [ ! -d "/app/www" ]; then
     mkdir /app/www
@@ -63,7 +50,55 @@ else
   echo "Magento OK"
 fi
 
+# Setup SSMTP service to send emails from PHP
+rm /etc/ssmtp/ssmtp.conf
+echo -e "root=postmaster \n\
+mailhub=${MAIL_HOST}:${MAIL_PORT} \n\
+FromLineOverride=YES \n\
+UseSTARTTLS=${MAIL_TLS} \n\
+" > /etc/ssmtp/ssmtp.conf
+
+if [ ! -z "$MAIL_USER"]; then
+  echo -e "AuthUser=${MAIL_USER}\n" >> /etc/ssmtp/ssmtp.conf
+fi
+if [ ! -z "$MAIL_PASS"]; then
+  echo -e "AuthPass=${MAIL_PASS}\n" >> /etc/ssmtp/ssmtp.conf
+fi
+if [ ! -z "$MAIL_DOMAIN"]; then
+  echo -e "hostname=${MAIL_DOMAIN}\nrewriteDomain=${MAIL_DOMAIN}\n" >> /etc/ssmtp/ssmtp.conf
+fi
+
+# Make sure Magento Cronjobs are running
+bin/magento cron:install
+
+# Start PHP FPM as the main process of this container
 php-fpm -c /usr/local/etc/php-fpm.conf
+
+# Run reindexer for all indexes
+bin/magento indexer:reindex catalogrule_product
+bin/magento indexer:reindex catalogrule_rule
+bin/magento indexer:reindex catalogsearch_fulltext
+bin/magento indexer:reindex catalog_category_product
+bin/magento indexer:reindex customer_grid
+bin/magento indexer:reindex design_config_grid
+bin/magento indexer:reindex inventory
+bin/magento indexer:reindex catalog_product_category
+bin/magento indexer:reindex catalog_product_attribute
+bin/magento indexer:reindex catalog_product_price
+bin/magento indexer:reindex cataloginventory_stock
+bin/magento indexer:status
 
 # Keep Container Running
 #tail -f /dev/null
+
+
+
+
+
+
+
+
+
+
+
+

@@ -72,8 +72,10 @@ bin/magento config:set system/smtp/host mail.docker
 bin/magento config:set system/smtp/port 25 
 ```
 
+bin/magento setup:perf:generate-fixtures /app/www/magento2/setup/performance-toolkit/profiles/ce/small.xml
+
 ### Servidor de email Fake
-http://localhost:1080
+http://localhost:8025
 
 
 

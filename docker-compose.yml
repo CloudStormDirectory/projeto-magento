@@ -52,13 +52,15 @@ services:
     command: "/./app/docker/nginx/start.sh"
 
   mail.docker:
+    image: "mailhog/mailhog:latest"
     container_name: "magento_mail"
-    image: "djfarrelly/maildev"
     restart: "no"
+    environment:
+      MH_SMTP_BIND_ADDR: 0.0.0.0:25
     expose:
-      - 1080
+      - 8025
       - 25
     ports:
-      - "1080:80"
       - "25:25"
+      - "8025:8025"
 
