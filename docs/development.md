@@ -72,7 +72,34 @@ bin/magento config:set system/smtp/host mail.docker
 bin/magento config:set system/smtp/port 25 
 ```
 
+cd /app/www/magento2
+export PATH=$PATH:/app/www/magento2/bin
 bin/magento setup:perf:generate-fixtures /app/www/magento2/setup/performance-toolkit/profiles/ce/small.xml
+
+
+## Backups e Restore
+https://experienceleague.adobe.com/docs/commerce-operations/configuration-guide/cli/configuration-management/export-configuration.html?lang=pt-BR
+```
+bin/magento app:config:dump scopes themes system
+```
+
+https://experienceleague.adobe.com/docs/commerce-operations/configuration-guide/cli/configuration-management/import-configuration.html?lang=pt-BR
+```
+bin/magento app:config:import 
+```
+
+https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/tutorials/backup.html?lang=en
+```
+bin/magento setup:backup --code --db --media
+```
+
+## Extension install
+https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/tutorials/extensions.html?lang=en
+
+## Caching
+https://devdocs.magento.com/guides/v2.3/extension-dev-guide/cache/page-caching/public-content.html
+https://experienceleague.adobe.com/docs/commerce-operations/configuration-guide/cache/varnish/config-varnish-install.html?lang=en
+
 
 ### Servidor de email Fake
 http://localhost:8025

@@ -1,5 +1,5 @@
 # our base image
-FROM elasticsearch:8.7.0
+FROM elasticsearch:7.17.9
 
 # specify the port number the container should expose
 EXPOSE 9200

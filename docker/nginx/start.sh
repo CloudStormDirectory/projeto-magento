@@ -44,6 +44,37 @@ if [ ! -d "/app/www/magento2" ]; then
   bin/magento config:set system/smtp/host mail.docker
   bin/magento config:set system/smtp/port 25
 
+  echo "Disable 2FA on Magento"
+  bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth --clear-static-content
+  bin/magento module:disable Magento_TwoFactorAuth --clear-static-content
+  bin/magento setup:di:compile
+  bin/magento cache:flush
+
+  echo "Remove writing permissions from directory"
+  # chmod 664 -R /app/www/magento2/app/etc
+
+  echo "Install Magento Cron Jobs"
+  cd /app/www/magento2/
+  bin/magento cron:install
+
+  echo "Run indexer"
+  bin/magento indexer:reindex catalogrule_product
+  bin/magento indexer:reindex catalogrule_rule
+  bin/magento indexer:reindex catalogsearch_fulltext
+  bin/magento indexer:reindex catalog_category_product
+  bin/magento indexer:reindex customer_grid
+  bin/magento indexer:reindex design_config_grid
+  bin/magento indexer:reindex inventory
+  bin/magento indexer:reindex catalog_product_category
+  bin/magento indexer:reindex catalog_product_attribute
+  bin/magento indexer:reindex catalog_product_price
+  bin/magento indexer:reindex cataloginventory_stock
+  bin/magento indexer:status
+
+  # https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/tutorials/backup.html?lang=en
+  echo "Enable Backups and Restore"
+  bin/magento config:set system/backup/functionality_enabled 1
+
   cd ..
   echo "Magento Installed"
 else
@@ -68,28 +99,11 @@ if [ ! -z "$MAIL_DOMAIN"]; then
   echo -e "hostname=${MAIL_DOMAIN}\nrewriteDomain=${MAIL_DOMAIN}\n" >> /etc/ssmtp/ssmtp.conf
 fi
 
-# Make sure Magento Cronjobs are running
-bin/magento cron:install
-
 # Start PHP FPM as the main process of this container
-php-fpm -c /usr/local/etc/php-fpm.conf
-
-# Run reindexer for all indexes
-bin/magento indexer:reindex catalogrule_product
-bin/magento indexer:reindex catalogrule_rule
-bin/magento indexer:reindex catalogsearch_fulltext
-bin/magento indexer:reindex catalog_category_product
-bin/magento indexer:reindex customer_grid
-bin/magento indexer:reindex design_config_grid
-bin/magento indexer:reindex inventory
-bin/magento indexer:reindex catalog_product_category
-bin/magento indexer:reindex catalog_product_attribute
-bin/magento indexer:reindex catalog_product_price
-bin/magento indexer:reindex cataloginventory_stock
-bin/magento indexer:status
+php-fpm -c /usr/local/etc/php-fpm.conf &
 
 # Keep Container Running
-#tail -f /dev/null
+tail -f /dev/null
 
 
 
