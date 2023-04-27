@@ -11,7 +11,8 @@ Não há garantias de funcionamento do código aqui hospedado, este repositório
 Caso seja membro ativo do programa de qualificação profissional da CloudStorm e queira contribuir com esse projeto entre em contato conosco via DM no servidor do Discord (https://discord.gg/acHQGUPwmN) para que possamos adicioná-lo(a). 
 
 Documentação:
-- [Preparação do ambiente de desenvolvimento](docs/development.md)
+- [Log de desenvolvimento](docs/dev-log.md)
+- [Preparação do ambiente de desenvolvimento](docs/development.md) *Precisando de revisão e ajustes
 - [Execução do ambiente de desenvolvimento](docs/execution.md)
 
 Roadmap do projeto:
