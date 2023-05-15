@@ -46,10 +46,24 @@ services:
     volumes:
       - ./:/app/
     expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    command: "/./app/docker/nginx/start.sh"
+
+  varnish.docker:
+    depends_on:
+      - "nginx.docker"
+    container_name: "magento_varnish"
+    image: magento_varnish
+    working_dir: /app/
+    restart: "no"
+    volumes:
+      - ./:/app/
+    expose:
       - 80
     ports:
       - "80:80"
-    command: "/./app/docker/nginx/start.sh"
 
   mail.docker:
     image: "mailhog/mailhog:latest"

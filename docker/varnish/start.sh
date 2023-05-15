@@ -75,9 +75,6 @@ if [ ! -d "/app/www/magento2" ]; then
   echo "Enable Backups and Restore"
   bin/magento config:set system/backup/functionality_enabled 1
 
-  echo "Setting up Varnish configuration"
-  bin/magento setup:config:set --http-cache-hosts=varnish.docker
-
   cd ..
   echo "Magento Installed"
 else
