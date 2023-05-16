@@ -6,18 +6,18 @@ cp -R /app/config/nginx /etc
 service nginx restart
 
 # Install Magento if it's not there yet
-if [ ! -d "/app/www/magento2" ]; then
-  if [ ! -d "/app/www" ]; then
-    mkdir /app/www
-  fi
+if [ ! -f "/app/www/magento2/setup.lock" ]; then
 
   echo "Installing Magento Keys"
   cp /app/.magento /root/.composer/auth.json
+  mkdir var/composer_home
+  cp /app/.magento /app/www/magento2/var/composer_home/auth.json
 
   echo "Installing Magento..."
-  cd /app/www
-  composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition magento2
-  cd magento2
+  cd /app/www/magento2
+  composer install
+  #composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition magento2
+  #cd magento2
 
   echo "Installing APP parameters"
   bin/magento setup:install \
