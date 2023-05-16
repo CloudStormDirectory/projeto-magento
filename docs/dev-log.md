@@ -1,4 +1,8 @@
 
+## 15/05/2023
+- Implantação do Varnish e configuração da integração com o Magento.
+- Criação do documento sobre o testes de performance `docs/performance.md`.
+- Primeiros modelos do JMeter para os testes de stress do Magento.
 
 ## 26/04/2023
 - Criado o `my.cnf` e adicionado ao DockerFile do container do MySQL para que seja possível popular o banco de dados usando
