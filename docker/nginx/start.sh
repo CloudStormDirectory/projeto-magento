@@ -78,6 +78,8 @@ if [ ! -f "/app/www/magento2/setup.lock" ]; then
   echo "Setting up Varnish configuration"
   bin/magento setup:config:set --http-cache-hosts=varnish.docker
 
+  touch setup.lock
+
   cd ..
   echo "Magento Installed"
 else
