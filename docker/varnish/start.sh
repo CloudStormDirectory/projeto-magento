@@ -40,10 +40,6 @@ if [ ! -d "/app/www/magento2" ]; then
   --elasticsearch-port=${ES_PORT} \
   --backend-frontname=admin
 
-  echo "Setting up Sendmail host and port"
-  bin/magento config:set system/smtp/host mail.docker
-  bin/magento config:set system/smtp/port 25
-
   echo "Disable 2FA on Magento"
   bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth --clear-static-content
   bin/magento module:disable Magento_TwoFactorAuth --clear-static-content

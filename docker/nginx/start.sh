@@ -40,10 +40,6 @@ if [ ! -f "/app/www/magento2/setup.lock" ]; then
   --elasticsearch-port=${ES_PORT} \
   --backend-frontname=admin
 
-  echo "Setting up Sendmail host and port"
-  bin/magento config:set system/smtp/host mail.docker
-  bin/magento config:set system/smtp/port 25
-
   echo "Disable 2FA on Magento"
   bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth --clear-static-content
   bin/magento module:disable Magento_TwoFactorAuth --clear-static-content
@@ -57,26 +53,16 @@ if [ ! -f "/app/www/magento2/setup.lock" ]; then
   cd /app/www/magento2/
   bin/magento cron:install
 
-  echo "Run indexer"
-  bin/magento indexer:reindex catalogrule_product
-  bin/magento indexer:reindex catalogrule_rule
-  bin/magento indexer:reindex catalogsearch_fulltext
-  bin/magento indexer:reindex catalog_category_product
-  bin/magento indexer:reindex customer_grid
-  bin/magento indexer:reindex design_config_grid
-  bin/magento indexer:reindex inventory
-  bin/magento indexer:reindex catalog_product_category
-  bin/magento indexer:reindex catalog_product_attribute
-  bin/magento indexer:reindex catalog_product_price
-  bin/magento indexer:reindex cataloginventory_stock
-  bin/magento indexer:status
-
   # https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/tutorials/backup.html?lang=en
   echo "Enable Backups and Restore"
   bin/magento config:set system/backup/functionality_enabled 1
 
   echo "Setting up Varnish configuration"
   bin/magento setup:config:set --http-cache-hosts=varnish.docker
+
+  echo "Creating Fake Products"
+  # bin/magento setup:perf:generate-fixtures /app/www/magento2/setup/performance-toolkit/profiles/ce/medium.xml
+  bin/magento indexer:reindex
 
   touch setup.lock
 

@@ -65,16 +65,3 @@ services:
     ports:
       - "80:80"
 
-  mail.docker:
-    image: "mailhog/mailhog:latest"
-    container_name: "magento_mail"
-    restart: "no"
-    environment:
-      MH_SMTP_BIND_ADDR: 0.0.0.0:25
-    expose:
-      - 8025
-      - 25
-    ports:
-      - "25:25"
-      - "8025:8025"
-
